@@ -1,0 +1,21 @@
+# ── Excluded directories ──────────────────────────────────────────
+/cache/
+/data/
+/labels/
+/sandbox/
+/wav2tobi/
+/code/else/
+/results/**/checkpoint/
+**/test_predictions.json
+
+# ── Runs: exclude everything except the two distributable checkpoints
+/runs/**
+!/runs/sbc/
+!/runs/sbc/sbc_stl/
+!/runs/sbc/sbc_stl/**
+!/runs/libri+sbc/
+!/runs/libri+sbc/libri+sbc_pos_stl/
+!/runs/libri+sbc/libri+sbc_pos_stl/**
+
+# ── Model weights (will host checkpoints for best runs on HuggingFace later) ──
+**/checkpoint/
