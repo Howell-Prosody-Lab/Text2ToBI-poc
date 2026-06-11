@@ -197,18 +197,42 @@ The following distinctions are important for interpreting reported numbers:
 
 ```
 text2tobi-poc/
-├── annotation_pipeline_libritts_silver.ipynb   # LibriTTS silver-standard annotation
-├── annotation_pipeline_sbcsae.ipynb            # SBCSAE gold-standard annotation
-├── annotation_pipeline_bu.ipynb                # BU Radio News gold-standard annotation
-├── annotation_pipeline_peoples_speech_silver.ipynb  # People's Speech annotation
-├── distilBERT_pos.ipynb                        # Main training notebook (current)
-├── distilBERT_multitrain_v2.ipynb              # Multi-run harness
-├── distilBERT.ipynb                            # Early single-task baseline
-├── parameter_tuning_w2t.ipynb                  # Wav2ToBI hyperparameter tuning
-├── runs_summary.xlsx                           # All experimental results
-├── results/                                    # Training curves and confusion matrices
-└── capstone.md                                 # This file
+├── code/
+│   ├── annotations/
+│   │   ├── annotation_pipeline_libritts_silver.ipynb
+│   │   ├── annotation_pipeline_sbcsae.ipynb
+│   │   ├── annotation_pipeline_bu.ipynb
+│   │   ├── annotation_pipeline_peoples_speech_silver.ipynb
+│   │   ├── parameter_tuning_w2t.ipynb
+│   │   ├── crossref_bu.py
+│   │   └── verify_bu_pipeline.py
+│   └── model/
+│       ├── distilBERT_pos.ipynb          # main training notebook (current)
+│       ├── distilBERT_multitrain_v2.ipynb
+│       ├── distilBERT.ipynb              # early single-task baseline
+│       └── run_summary.ipynb
+├── runs/                                 # complete experimental record
+│   ├── sbc/
+│   ├── libri/
+│   ├── libri+sbc/
+│   ├── libri+sbc+bu/
+│   └── sbc+bu/
+│       └── {run_id}/
+│           ├── {run_id}_curves.png
+│           ├── {run_id}_confusion_matrix.png
+│           └── {run_id}_hparams.json
+│           # checkpoint/ excluded — see HuggingFace Hub note below
+├── results/                              # curated highlights
+│   ├── sbc_stl_curves.png
+│   ├── sbc_stl_confusion_matrix.png
+│   ├── libri+sbc_pos_stl_curves.png
+│   ├── libri+sbc_pos_stl_confusion_matrix.png
+│   ├── libri+sbc_posonly_stl_curves.png  # POS-only collapse
+│   └── runs_summary.xlsx
+└── README.md
 ```
+
+**Model weights** are not included in this repository due to file size. Checkpoints for `sbc_stl` and `libri+sbc_pos_stl` will be uploaded to HuggingFace Hub — link to follow.
 
 ### Environment
 
