@@ -2,12 +2,11 @@
 /cache/
 /data/
 /labels/
-/runs/
 /sandbox/
 /wav2tobi/
 /code/else/
 /results/**/checkpoint/
-**/test_predictions.json
+**/*test_predictions*.json
 
 # ── Runs: everything except checkpoints ───────────────────────────
-/runs/**/checkpoint/
+/runs/**/checkpoint*/
