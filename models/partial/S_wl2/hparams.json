@@ -1,0 +1,230 @@
+{
+  "run_id": "S_wl2",
+  "run_notes": "",
+  "timestamp": "2026-06-23T15:34:26.598618",
+  "data": {
+    "datasets": [
+      "sbc"
+    ],
+    "n_samples_train_pool": 3757,
+    "n_train": 3333,
+    "n_val": 424,
+    "n_test": 383,
+    "n_words_by_corpus": {
+      "sbc": 431990
+    },
+    "n_words_total": 431990,
+    "n_words_val_by_corpus": {
+      "sbc": 48144
+    },
+    "n_words_val_total": 48144,
+    "n_words_train_total": 383846,
+    "split_mode": "fixed_sbc_holdout",
+    "split_seed": 42,
+    "train_frac": 0.8,
+    "val_frac": 0.1
+  },
+  "preprocessing": {
+    "strip_punctuation": true,
+    "train_on_text": true,
+    "train_on_pos": false,
+    "pos_embedding_dim": null,
+    "extra_features": [],
+    "max_length": 128
+  },
+  "model": {
+    "base": "distilbert-base-uncased",
+    "use_pos_embedding": false,
+    "pos_emb_dim": null,
+    "num_pos_tags": null,
+    "hidden_size": 768,
+    "n_trainable_params": 66368263
+  },
+  "versions": {
+    "transformers": "5.12.0",
+    "torch": "2.11.0+cu128",
+    "spacy": null,
+    "cuda": "12.8"
+  },
+  "training": {
+    "batch_size": 16,
+    "learning_rate": 2e-05,
+    "num_epochs": 6,
+    "warmup_steps": 0,
+    "weight_decay": 0.01,
+    "imbalance_strategy": "weighted_loss",
+    "boundary_loss_weight": 2.0,
+    "boundary_task_weight": 1.0,
+    "intonation_task_weight": 1.0,
+    "break_idx_task_weight": 1.0,
+    "best_epoch": 6
+  },
+  "results": {
+    "best_val_boundary_f1": 0.8374278647980214,
+    "test": {
+      "boundary": {
+        "f1": 0.8230157635920768,
+        "precision": 0.7961942023830695,
+        "recall": 0.8517074098734899
+      },
+      "intonation": {
+        "f1": 0.5538175251339053,
+        "precision": 0.6002184901608262,
+        "recall": 0.541940965113287
+      },
+      "break_idx": {
+        "f1": NaN,
+        "precision": NaN,
+        "recall": NaN
+      }
+    },
+    "bu_eval": {
+      "f1": 0.3749508249772774,
+      "precision": 0.5543789144841601,
+      "recall": 0.529784470012858
+    },
+    "intonation_checkpoint": {
+      "enabled": true,
+      "best_intonation_epoch": 6,
+      "best_val_intonation_f1": 0.624966952994228,
+      "test": {
+        "boundary": {
+          "f1": 0.8230157635920768,
+          "precision": 0.7961942023830695,
+          "recall": 0.8517074098734899
+        },
+        "intonation": {
+          "f1": 0.5538175251339053,
+          "precision": 0.6002184901608262,
+          "recall": 0.541940965113287
+        },
+        "break_idx": {
+          "f1": NaN,
+          "precision": NaN,
+          "recall": NaN
+        }
+      },
+      "bu_eval": {
+        "f1": 0.3749508249772774,
+        "precision": 0.5543789144841601,
+        "recall": 0.529784470012858
+      }
+    },
+    "per_epoch_test": {
+      "2": {
+        "val_boundary_f1": 0.8238237827638542,
+        "test_boundary_f1": 0.8175403225806451,
+        "test_boundary_precision": 0.7887012642560339,
+        "test_boundary_recall": 0.8485684390754304
+      },
+      "3": {
+        "val_boundary_f1": 0.8291767010898404,
+        "test_boundary_f1": 0.8188718694604791,
+        "test_boundary_precision": 0.7841225626740947,
+        "test_boundary_recall": 0.856843907543042
+      },
+      "4": {
+        "val_boundary_f1": 0.8339030517688728,
+        "test_boundary_f1": 0.8222845838892211,
+        "test_boundary_precision": 0.7962401995723449,
+        "test_boundary_recall": 0.8500903643108533
+      },
+      "5": {
+        "val_boundary_f1": 0.8374000579974316,
+        "test_boundary_f1": 0.8224307706532291,
+        "test_boundary_precision": 0.8000539665407448,
+        "test_boundary_recall": 0.8460953105678684
+      },
+      "6": {
+        "val_boundary_f1": 0.8374278647980214,
+        "test_boundary_f1": 0.8230157635920768,
+        "test_boundary_precision": 0.7961942023830695,
+        "test_boundary_recall": 0.8517074098734899
+      }
+    },
+    "val_history": {
+      "loss": [
+        0.9543871658819693,
+        0.888871654316231,
+        0.8644124269485474,
+        0.8500476876894633,
+        0.8449677692519294,
+        0.8414538657223737
+      ],
+      "boundary_f1": [
+        0.8079454253611557,
+        0.8238237827638542,
+        0.8291767010898404,
+        0.8339030517688728,
+        0.8374000579974316,
+        0.8374278647980214
+      ],
+      "boundary_prec": [
+        0.7499255065554231,
+        0.7794768299309167,
+        0.7811274321310466,
+        0.7918654673445444,
+        0.7994146958791426,
+        0.7958320275775619
+      ],
+      "boundary_rec": [
+        0.8756958942240779,
+        0.8735212247738344,
+        0.8835247042449548,
+        0.8806541405706333,
+        0.8791753653444676,
+        0.8836116910229646
+      ],
+      "intonation_f1": [
+        0.48175861535674763,
+        0.5426081651519746,
+        0.60309577525431,
+        0.6070749023248526,
+        0.6205449572280646,
+        0.624966952994228
+      ],
+      "break_idx_f1": [
+        NaN,
+        NaN,
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ]
+    },
+    "train_history": {
+      "loss": [
+        1.1035445720385135,
+        0.9289760620970475,
+        0.8580527448197871,
+        0.8074949788705014,
+        0.771482872620724,
+        0.7496261839090922
+      ],
+      "boundary_f1": [
+        0.745198636029145,
+        0.8101956836473647,
+        0.8244152916497073,
+        0.8326953789763057,
+        0.8378349995799378,
+        0.840320766813457
+      ],
+      "intonation_f1": [
+        0.4442714984908401,
+        0.4941186746100013,
+        0.5675214808758247,
+        0.6156701746698717,
+        0.6450938108298673,
+        0.6542729843574641
+      ],
+      "break_idx_f1": [
+        NaN,
+        NaN,
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ]
+    }
+  }
+}

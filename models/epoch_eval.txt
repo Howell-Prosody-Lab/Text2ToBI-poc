@@ -1,0 +1,111 @@
+Per-epoch checkpoint evaluation
+Generated: 2026-06-23 01:42
+BU break-index eval: enabled
+========================================================================
+
+Model #13 -- LS_stl_pos_2
+  EPOCH 2: boundary_F1 = 0.8185   | intonation_F1 = 0.5606   | break_F1 = 0.6269 ★
+  EPOCH 3: boundary_F1 = 0.8202 ★ | intonation_F1 = 0.5771 ★ | break_F1 = 0.6104  
+
+Model #14 -- S_stl_pos
+  EPOCH 3: boundary_F1 = 0.8139   | intonation_F1 = 0.5458   | break_F1 = 0.4661 ★
+  EPOCH 5: boundary_F1 = 0.8169 ★ | intonation_F1 = 0.5600 ★ | break_F1 = 0.4637  
+
+Model #15 -- L_stl_pos
+  EPOCH 2: boundary_F1 = 0.5799   | intonation_F1 = 0.2201   | break_F1 = 0.6512 ★
+  EPOCH 3: boundary_F1 = 0.5920 ★ | intonation_F1 = 0.2219 ★ | break_F1 = 0.6321  
+
+Model #16 -- P_stl_pos
+  EPOCH 2: boundary_F1 = 0.5786   | intonation_F1 = 0.2210   | break_F1 = 0.6158 ★
+  EPOCH 6: boundary_F1 = 0.6057 ★ | intonation_F1 = 0.2346 ★ | break_F1 = 0.5553  
+
+Model #17 -- LP_stl_pos
+  EPOCH 2: boundary_F1 = 0.5923   | intonation_F1 = 0.2080   | break_F1 = 0.6348 ★
+  EPOCH 6: boundary_F1 = 0.6077 ★ | intonation_F1 = 0.2490 ★ | break_F1 = 0.5930  
+
+Model #18 -- S_wl
+  EPOCH 5: boundary_F1 = 0.7983 ★ | intonation_F1 = 0.5459 ★ | break_F1 = 0.4220  
+  EPOCH 6: boundary_F1 = 0.7970   | intonation_F1 = 0.5457   | break_F1 = 0.4247 ★
+
+Model #19 -- LS_wl
+  EPOCH 2: boundary_F1 = 0.8013   | intonation_F1 = 0.5625   | break_F1 = 0.6132 ★
+  EPOCH 4: boundary_F1 = 0.8099 ★ | intonation_F1 = 0.5697 ★ | break_F1 = 0.5933  
+
+Model #20 -- PS_wl
+  EPOCH 5: boundary_F1 = 0.8137 ★ | intonation_F1 = 0.5669 ★ | break_F1 = 0.6116 ★
+
+Model #21 -- L_wl
+  EPOCH 2: boundary_F1 = 0.7196 ★ | intonation_F1 = 0.2296   | break_F1 = 0.6283 ★
+  EPOCH 3: boundary_F1 = 0.7093   | intonation_F1 = 0.2309 ★ | break_F1 = 0.6146  
+
+Model #22 -- LS_wl_2
+  EPOCH 3: boundary_F1 = 0.8095   | intonation_F1 = 0.5776 ★ | break_F1 = 0.6268 ★
+  EPOCH 4: boundary_F1 = 0.8193 ★ | intonation_F1 = 0.5697   | break_F1 = 0.6141  
+
+Model #23 -- LS_wl_3
+  EPOCH 2: boundary_F1 = 0.7639   | intonation_F1 = 0.5639   | break_F1 = 0.6357 ★
+  EPOCH 3: boundary_F1 = 0.7844   | intonation_F1 = 0.5832 ★ | break_F1 = 0.5861  
+  EPOCH 6: boundary_F1 = 0.7876 ★ | intonation_F1 = 0.5644   | break_F1 = 0.5587  
+
+Model #24 -- LS_wl2
+  EPOCH 2: boundary_F1 = 0.8239   | intonation_F1 = 0.5595   | break_F1 = 0.6292 ★
+  EPOCH 4: boundary_F1 = 0.8256 ★ | intonation_F1 = 0.5618   | break_F1 = 0.5673  
+  EPOCH 5: boundary_F1 = 0.8251   | intonation_F1 = 0.5654 ★ | break_F1 = 0.5644  
+
+Model #25 -- LS_wl4
+  EPOCH 2: boundary_F1 = 0.8113   | intonation_F1 = 0.5721 ★ | break_F1 = 0.5736  
+  EPOCH 3: boundary_F1 = 0.8162 ★ | intonation_F1 = 0.5704   | break_F1 = 0.6041  
+  EPOCH 4: boundary_F1 = 0.8033   | intonation_F1 = 0.5689   | break_F1 = 0.6072 ★
+
+Model #26 -- LPS_wl3
+  EPOCH 2: boundary_F1 = 0.8251   | intonation_F1 = 0.5717   | break_F1 = 0.5964 ★
+  EPOCH 5: boundary_F1 = 0.8237   | intonation_F1 = 0.5777 ★ | break_F1 = 0.5575  
+  EPOCH 6: boundary_F1 = 0.8253 ★ | intonation_F1 = 0.5746   | break_F1 = 0.5578  
+
+Model #27 -- S_wl3
+  EPOCH 3: boundary_F1 = 0.8177 ★ | intonation_F1 = 0.5322   | break_F1 = 0.3406  
+  EPOCH 5: boundary_F1 = 0.8158   | intonation_F1 = 0.5542 ★ | break_F1 = 0.3672 ★
+
+Model #28 -- L_wl3
+  EPOCH 2: boundary_F1 = 0.6705   | intonation_F1 = 0.2187   | break_F1 = 0.6550 ★
+  EPOCH 6: boundary_F1 = 0.6755 ★ | intonation_F1 = 0.2282 ★ | break_F1 = 0.5934  
+
+Model #29 -- P_wl3
+  EPOCH 2: boundary_F1 = 0.7767 ★ | intonation_F1 = 0.2157   | break_F1 = 0.6241 ★
+  EPOCH 6: boundary_F1 = 0.7574   | intonation_F1 = 0.2297 ★ | break_F1 = 0.5818  
+
+Model #30 -- LP_wl3
+  EPOCH 2: boundary_F1 = 0.7710   | intonation_F1 = 0.2135   | break_F1 = 0.6268 ★
+  EPOCH 3: boundary_F1 = 0.7776 ★ | intonation_F1 = 0.2266   | break_F1 = 0.6081  
+  EPOCH 6: boundary_F1 = 0.7715   | intonation_F1 = 0.2457 ★ | break_F1 = 0.5709  
+
+Model #31 -- PS_wl3
+  EPOCH 2: boundary_F1 = 0.8223   | intonation_F1 = 0.5569   | break_F1 = 0.5818 ★
+  EPOCH 4: boundary_F1 = 0.8291 ★ | intonation_F1 = 0.5635   | break_F1 = 0.5734  
+  EPOCH 6: boundary_F1 = 0.8275   | intonation_F1 = 0.5651 ★ | break_F1 = 0.5555  
+
+Model #32 -- L_wl5
+  EPOCH 2: boundary_F1 = 0.7167 ★ | intonation_F1 = 0.2261   | break_F1 = 0.6524 ★
+  EPOCH 3: boundary_F1 = 0.7138   | intonation_F1 = 0.2264 ★ | break_F1 = 0.6106  
+
+Model #33 -- LPS_stl_pp
+  EPOCH 2: boundary_F1 = 0.8226   | intonation_F1 = 0.5516   | break_F1 = 0.6062 ★
+  EPOCH 5: boundary_F1 = 0.8269 ★ | intonation_F1 = 0.5714   | break_F1 = 0.5554  
+  EPOCH 6: boundary_F1 = 0.8253   | intonation_F1 = 0.5736 ★ | break_F1 = 0.5503  
+
+Model #34 -- LPS_wl3_pp
+  EPOCH 3: boundary_F1 = 0.8246 ★ | intonation_F1 = 0.5813 ★ | break_F1 = 0.5964 ★
+
+Model #44 -- LPS_wl2_pp
+  EPOCH 2: boundary_F1 = 0.8330   | intonation_F1 = 0.5403   | break_F1 = 0.6127 ★
+  EPOCH 5: boundary_F1 = 0.8336   | intonation_F1 = 0.5690 ★ | break_F1 = 0.5362  
+  EPOCH 6: boundary_F1 = 0.8344 ★ | intonation_F1 = 0.5688   | break_F1 = 0.5396  
+
+Model #45 -- LPS_wl2
+  EPOCH 2: boundary_F1 = 0.8352 ★ | intonation_F1 = 0.5765 ★ | break_F1 = 0.6018 ★
+
+Model #46 -- LPS_wl2_pos
+  EPOCH 2: boundary_F1 = 0.8346 ★ | intonation_F1 = 0.5514   | break_F1 = 0.5834 ★
+  EPOCH 4: boundary_F1 = 0.8345   | intonation_F1 = 0.5697 ★ | break_F1 = 0.5745  
+
+========================================================================

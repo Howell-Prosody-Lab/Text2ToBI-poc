@@ -1,0 +1,233 @@
+{
+  "run_id": "LP_wl3",
+  "run_notes": "",
+  "timestamp": "2026-06-17T22:47:52.460751",
+  "data": {
+    "datasets": [
+      "libri",
+      "ps"
+    ],
+    "n_samples_train_pool": 275956,
+    "n_train": 245300,
+    "n_val": 30656,
+    "n_test": 383,
+    "n_words_by_corpus": {
+      "libri": 2564256,
+      "ps": 4919077
+    },
+    "n_words_total": 7483333,
+    "n_words_val_by_corpus": {
+      "libri": 284955,
+      "ps": 546571
+    },
+    "n_words_val_total": 831526,
+    "n_words_train_total": 6651807,
+    "split_mode": "fixed_sbc_holdout",
+    "split_seed": 42,
+    "train_frac": 0.8,
+    "val_frac": 0.1
+  },
+  "preprocessing": {
+    "strip_punctuation": true,
+    "train_on_text": true,
+    "train_on_pos": false,
+    "pos_embedding_dim": null,
+    "extra_features": [],
+    "max_length": 128
+  },
+  "model": {
+    "base": "distilbert-base-uncased",
+    "use_pos_embedding": false,
+    "pos_emb_dim": null,
+    "num_pos_tags": null,
+    "hidden_size": 768,
+    "n_trainable_params": 66368263
+  },
+  "versions": {
+    "transformers": "5.10.2",
+    "torch": "2.11.0+cu128",
+    "spacy": null,
+    "cuda": "12.8"
+  },
+  "training": {
+    "batch_size": 16,
+    "learning_rate": 2e-05,
+    "num_epochs": 6,
+    "warmup_steps": 0,
+    "weight_decay": 0.01,
+    "imbalance_strategy": "weighted_loss",
+    "boundary_loss_weight": 3.0,
+    "boundary_task_weight": 1.0,
+    "intonation_task_weight": 1.0,
+    "break_idx_task_weight": 1.0,
+    "best_epoch": 3
+  },
+  "results": {
+    "best_val_boundary_f1": 0.7761248624785101,
+    "test": {
+      "boundary": {
+        "f1": 0.7775893035322291,
+        "precision": 0.8176476760046165,
+        "recall": 0.7412727099781223
+      },
+      "intonation": {
+        "f1": 0.22661216330646852,
+        "precision": 0.2812422537291992,
+        "recall": 0.3457912876534401
+      },
+      "break_idx": {
+        "f1": NaN,
+        "precision": NaN,
+        "recall": NaN
+      }
+    },
+    "bu_eval": {
+      "f1": 0.6081386742033984,
+      "precision": 0.6062330365358324,
+      "recall": 0.614491168819087
+    },
+    "intonation_checkpoint": {
+      "enabled": true,
+      "best_intonation_epoch": 6,
+      "best_val_intonation_f1": 0.3934594074849591,
+      "test": {
+        "boundary": {
+          "f1": 0.7714848683878138,
+          "precision": 0.8227370689655172,
+          "recall": 0.726243698278322
+        },
+        "intonation": {
+          "f1": 0.2457421489442437,
+          "precision": 0.33447185745235886,
+          "recall": 0.3590213415605244
+        },
+        "break_idx": {
+          "f1": NaN,
+          "precision": NaN,
+          "recall": NaN
+        }
+      },
+      "bu_eval": {
+        "f1": 0.5708835522978494,
+        "precision": 0.5711123017930259,
+        "recall": 0.5781603533801362
+      }
+    },
+    "per_epoch_test": {
+      "2": {
+        "val_boundary_f1": 0.7749615566678524,
+        "test_boundary_f1": 0.7709536483704112,
+        "test_boundary_precision": 0.816595744680851,
+        "test_boundary_recall": 0.730143631694093
+      },
+      "3": {
+        "val_boundary_f1": 0.7761248624785101,
+        "test_boundary_f1": 0.7775893035322291,
+        "test_boundary_precision": 0.8176476760046165,
+        "test_boundary_recall": 0.7412727099781223
+      },
+      "4": {
+        "val_boundary_f1": 0.7715408674472031,
+        "test_boundary_f1": 0.7744540831588393,
+        "test_boundary_precision": 0.81372446306967,
+        "test_boundary_recall": 0.7387995814705602
+      },
+      "5": {
+        "val_boundary_f1": 0.7739817758355072,
+        "test_boundary_f1": 0.7723712798746906,
+        "test_boundary_precision": 0.8237766760077603,
+        "test_boundary_recall": 0.7270046608960334
+      },
+      "6": {
+        "val_boundary_f1": 0.7729582653103939,
+        "test_boundary_f1": 0.7714848683878138,
+        "test_boundary_precision": 0.8227370689655172,
+        "test_boundary_recall": 0.726243698278322
+      }
+    },
+    "val_history": {
+      "loss": [
+        1.6934085518806115,
+        1.6848365044792908,
+        1.6970843787233119,
+        1.7205387526551468,
+        1.7510963296653832,
+        1.7821816185135433
+      ],
+      "boundary_f1": [
+        0.7748341747221154,
+        0.7749615566678524,
+        0.7761248624785101,
+        0.7715408674472031,
+        0.7739817758355072,
+        0.7729582653103939
+      ],
+      "boundary_prec": [
+        0.7173727370379104,
+        0.7113225010283833,
+        0.7151145908949497,
+        0.7012543333115305,
+        0.7093656146536967,
+        0.7073127132321396
+      ],
+      "boundary_rec": [
+        0.8423024627935449,
+        0.8511065036698885,
+        0.8485163560745421,
+        0.8574865109296845,
+        0.8515494742800189,
+        0.8520355114772454
+      ],
+      "intonation_f1": [
+        0.31955102602549273,
+        0.3439259431403943,
+        0.3568497229220981,
+        0.3702767007647691,
+        0.37937108497250754,
+        0.3934594074849591
+      ],
+      "break_idx_f1": [
+        0.6605492950151319,
+        0.665916748639143,
+        0.6611842166449206,
+        0.6602454864915756,
+        0.6578946448784152,
+        0.6558161795394961
+      ]
+    },
+    "train_history": {
+      "loss": [
+        1.7984773703026393,
+        1.7309440294989649,
+        1.6796331807928238,
+        1.6279314440565011,
+        1.578437094103099,
+        1.540508956206924
+      ],
+      "boundary_f1": [
+        0.7572995835793583,
+        0.7732049372714362,
+        0.7798829121758336,
+        0.7834929023586902,
+        0.7859867315402216,
+        0.787464224088049
+      ],
+      "intonation_f1": [
+        0.29610123326814264,
+        0.34011480409871925,
+        0.37501633451848515,
+        0.40865608957354604,
+        0.4404200356999249,
+        0.4630319118628465
+      ],
+      "break_idx_f1": [
+        0.6425571841857951,
+        0.6697121303984297,
+        0.6910716485282307,
+        0.7116397583679593,
+        0.7307226273193763,
+        0.7441906020282578
+      ]
+    }
+  }
+}

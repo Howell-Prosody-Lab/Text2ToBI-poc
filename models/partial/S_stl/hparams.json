@@ -1,0 +1,198 @@
+{
+  "run_id": "S_stl",
+  "run_notes": "",
+  "timestamp": "2026-06-17T00:09:32.323636",
+  "data": {
+    "datasets": [
+      "sbc"
+    ],
+    "n_samples_train_pool": 3757,
+    "n_train": 3333,
+    "n_val": 424,
+    "n_test": 383,
+    "n_words_by_corpus": {
+      "sbc": 431990
+    },
+    "n_words_total": 431990,
+    "n_words_val_by_corpus": {
+      "sbc": 48144
+    },
+    "n_words_val_total": 48144,
+    "n_words_train_total": 383846,
+    "split_mode": "fixed_sbc_holdout",
+    "split_seed": 42,
+    "train_frac": 0.8,
+    "val_frac": 0.1
+  },
+  "preprocessing": {
+    "strip_punctuation": true,
+    "train_on_text": true,
+    "train_on_pos": false,
+    "pos_embedding_dim": null,
+    "extra_features": [],
+    "max_length": 128
+  },
+  "model": {
+    "base": "distilbert-base-uncased",
+    "use_pos_embedding": false,
+    "pos_emb_dim": null,
+    "num_pos_tags": null,
+    "hidden_size": 768,
+    "n_trainable_params": 66368263
+  },
+  "versions": {
+    "transformers": "5.10.2",
+    "torch": "2.11.0+cu128",
+    "spacy": null,
+    "cuda": "12.8"
+  },
+  "training": {
+    "batch_size": 16,
+    "learning_rate": 2e-05,
+    "num_epochs": 6,
+    "warmup_steps": 0,
+    "weight_decay": 0.01,
+    "imbalance_strategy": "none",
+    "boundary_loss_weight": 5.0,
+    "boundary_task_weight": 1.0,
+    "intonation_task_weight": 1.0,
+    "break_idx_task_weight": 1.0,
+    "best_epoch": 6
+  },
+  "results": {
+    "best_val_boundary_f1": 0.8374570749317601,
+    "test": {
+      "boundary": {
+        "f1": 0.8174187814752641,
+        "precision": 0.849810081100503,
+        "recall": 0.7874060686768762
+      },
+      "intonation": {
+        "f1": 0.5508193188121636,
+        "precision": 0.5954966769490001,
+        "recall": 0.5397658428259067
+      },
+      "break_idx": {
+        "f1": NaN,
+        "precision": NaN,
+        "recall": NaN
+      }
+    },
+    "bu_eval": {
+      "f1": 0.44491423647523287,
+      "precision": 0.45350230949861947,
+      "recall": 0.44761480452124564
+    },
+    "intonation_checkpoint": {
+      "enabled": true,
+      "best_intonation_epoch": 6,
+      "best_val_intonation_f1": 0.628707337987232,
+      "test": {
+        "boundary": {
+          "f1": 0.8174187814752641,
+          "precision": 0.849810081100503,
+          "recall": 0.7874060686768762
+        },
+        "intonation": {
+          "f1": 0.5508193188121636,
+          "precision": 0.5954966769490001,
+          "recall": 0.5397658428259067
+        },
+        "break_idx": {
+          "f1": NaN,
+          "precision": NaN,
+          "recall": NaN
+        }
+      },
+      "bu_eval": {
+        "f1": 0.44491423647523287,
+        "precision": 0.45350230949861947,
+        "recall": 0.44761480452124564
+      }
+    },
+    "val_history": {
+      "loss": [
+        0.9302029962892886,
+        0.8750875194867452,
+        0.8388682824594004,
+        0.8261275048609134,
+        0.8211162487665812,
+        0.8185457587242126
+      ],
+      "boundary_f1": [
+        0.8050420916662955,
+        0.8215943759119246,
+        0.8326187845303867,
+        0.8347525279403938,
+        0.8369007606580576,
+        0.8374570749317601
+      ],
+      "boundary_prec": [
+        0.8249201277955271,
+        0.8354464526571351,
+        0.8463473807170455,
+        0.8515200868621065,
+        0.851205469593379,
+        0.8478338384738813
+      ],
+      "boundary_rec": [
+        0.7860995128740431,
+        0.8081941544885177,
+        0.8193284620737648,
+        0.8186325678496869,
+        0.8230688935281837,
+        0.8273312456506611
+      ],
+      "intonation_f1": [
+        0.47702617447851553,
+        0.4936530877479268,
+        0.5574499417455655,
+        0.6056905690601632,
+        0.6269349670516827,
+        0.628707337987232
+      ],
+      "break_idx_f1": [
+        NaN,
+        NaN,
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ]
+    },
+    "train_history": {
+      "loss": [
+        1.0781114369488218,
+        0.9082513294721904,
+        0.8389720862562006,
+        0.7882100463483892,
+        0.7477933527750261,
+        0.7273641262898605
+      ],
+      "boundary_f1": [
+        0.723576997993671,
+        0.8067490925589836,
+        0.8221966445350374,
+        0.8311888365349764,
+        0.8364310371214311,
+        0.8388881644963235
+      ],
+      "intonation_f1": [
+        0.43915420221009094,
+        0.48247401193529865,
+        0.5311498509522757,
+        0.5967134133285995,
+        0.6356148344655,
+        0.6506630459715769
+      ],
+      "break_idx_f1": [
+        NaN,
+        NaN,
+        NaN,
+        NaN,
+        NaN,
+        NaN
+      ]
+    }
+  }
+}

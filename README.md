@@ -1,8 +1,8 @@
 # text2tobi-poc
 
-A research prototype for predicting ToBI prosodic structure from text alone — no audio required at inference time. This repository contains the full annotation pipeline, training notebooks, and experimental results for the capstone project underlying the [`text2tobi`](https://github.com/your-handle/text2tobi) package.
+A research prototype for predicting ToBI prosodic structure from text alone — no audio required at inference time. This repository contains the full annotation pipeline, training notebooks, and experimental results for the capstone project underlying the [`text2tobi`](https://github.com/Howell-Prosody-Lab/Text2ToBI) package.
 
-**Best result:** boundary F1 = **0.8419** (`sbc_stl`) and **0.8408** (`libri+sbc_pos_stl`) on the SBC001–005 gold held-out test set, against a GPT-Neo text-only baseline of 0.77.
+**Best result:** boundary F1 = **0.84** (Model #36: LibriTTS + People's Speech + SBCSAE, BLW=2.0) on the SBC001–005 gold held-out test set, against a GPT-Neo text-only baseline of 0.77. Intonation F1 = 0.58; break index F1 = 0.60 (0.65 at BLW=5.0) on the BU Radio News Corpus.
 
 ---
 
@@ -51,115 +51,117 @@ Not all positions carry supervision for all heads:
 
 - **Boundary:** all positions supervised (0 = no boundary, 1 = boundary)
 - **Intonation:** positions with `none` or `unclear` labels are masked to -100; only rising (1), falling (2), and level (3) labels are trained on
-- **Break index:** empty string labels (present in LibriTTS silver data and SBCSAE, where Wav2ToBI was not applied) are masked to -100; only `"3"` and `"4"` receive real supervision. Empty strings represent absence of annotation, not an affirmative "no break" — treating them as class 0 would fabricate supervision.
+- **Break index:** empty string labels (present in SBCSAE, where Wav2ToBI was not applied) are masked to -100; only `"3"` and `"4"` receive real supervision. Empty strings represent absence of annotation, not an affirmative "no break" — treating them as class 0 would fabricate supervision.
 
 ### Loss
 
 Two loss strategies were explored:
 
 - **Standard loss (stl):** unweighted cross-entropy across all three heads
-- **Weighted loss:** upweights the minority boundary class to address class imbalance (~15% of tokens are boundaries)
+- **Weighted loss:** upweights the minority boundary class to address class imbalance (~15% of tokens are boundaries); controlled by the `boundary_loss_weight` hyperparameter
 
-Weighted loss produces a different precision/recall operating point (higher recall, lower precision) rather than uniformly better results. Both are reported.
+Weighted loss produces a different precision/recall operating point (higher recall, lower precision) rather than uniformly better results. The effect is non-monotonic: boundary F1 peaks at BLW=2.0 on the full corpus, while break index F1 peaks at BLW=5.0.
 
 ---
 
 ## Data and Annotation Pipeline
 
-Three corpora are used, combining silver-standard automatic annotation with gold-standard human annotation.
+Four corpora are used, combining silver-standard automatic annotation with gold-standard human annotation.
 
 ### LibriTTS (silver standard)
 
 LibriTTS is a large collection of audiobook recordings — read speech from thousands of speakers across clean studio conditions. Transcripts are exact. The silver-standard annotation pipeline processes LibriTTS using two independent automatic annotators and retains only positions where both agree.
 
-**~145,000 samples** (utterance-level). Used for training only; not part of the held-out test set. Random 80/10/10 train/val/test split when used without SBCSAE.
+Approximately 2.28 million training words across clean-100 and clean-360 subsets. Used for training only; not part of the held-out test set. Train/validation split is 89/11 word-proportional within each subset (seed 42).
 
-LibriTTS provides Wav2ToBI break index labels (`"3"` / `"4"`) for boundary positions, making it the primary supervision source for the break index head.
+LibriTTS provides Wav2ToBI break index labels (`"3"` / `"4"`) for boundary positions via the silver-standard pipeline, making it a primary supervision source for the break index head.
+
+### People's Speech (silver standard)
+
+The People's Speech Corpus is a large-scale dataset spanning a wide range of domains — interviews, speeches, podcasts, YouTube videos, and other Internet Archive sources — mixing single-speaker and multi-speaker data. The clean, CC-BY-licensed subset (MLCommons) is used here.
+
+Approximately 4.37 million training words. Train/validation split is 89/11 word-proportional (seed 42). People's Speech contributes register diversity that LibriTTS alone does not provide, and is the largest single training data source in the pipeline.
 
 ### SBCSAE — Santa Barbara Corpus of Spoken American English (gold standard)
 
 SBCSAE contains 60 recordings of naturally occurring spoken American English across a wide range of registers and participant configurations. Labels are derived directly from the Du Bois transcript markup — IU line boundaries become boundary labels; terminal contour markers (`.` falling, `,` level, `?` rising) become intonation labels. No automatic annotation tools are applied.
 
-**~4,140 samples** (30-IU sliding windows, 50% overlap). **SBC001–005 are held out as the fixed test set** for all runs that include SBCSAE, providing the only apples-to-apples comparison with the GPT-Neo baseline.
+Approximately 383,000 windowed training words (30-IU sliding windows, stride 15; unique word count ~217,600). **SBC001–005 are held out as the fixed test set** for all runs that include SBCSAE, providing the only apples-to-apples comparison with the GPT-Neo baseline.
 
-Note: SBCSAE transcripts do not include ToBI break indices. The `x` field is null for all SBCSAE samples and is substituted with empty strings downstream, masking all break index positions for this corpus.
+Note: SBCSAE transcripts do not include ToBI break indices. All break index positions for this corpus are masked to -100 and receive no supervision.
 
-### BU Radio News Corpus (gold standard)
+### BU Radio News Corpus (gold standard, evaluation only)
 
-The Boston University Radio News Corpus contains ~426 annotated files of professionally read broadcast news speech. Unlike LibriTTS and SBCSAE, BU provides explicit human-annotated ToBI labels including break indices, making it the most direct ToBI supervision source in the pipeline.
+The Boston University Radio News Corpus contains ~426 annotated files of professionally read broadcast news speech. BU provides explicit human-annotated ToBI labels including break indices, encoded in `.brk` files, making it the gold-standard evaluation set for the break index head.
 
 The BU annotation pipeline (`annotation_pipeline_bu.ipynb`) parses `.ala` (word alignment), `.brk` (break index), and `.ton` (boundary tone) files. Key decisions:
 
-- One utterance = one sample (no windowing; BU files are discrete annotated utterances, not continuous conversation)
+- One utterance = one sample (no windowing)
 - `.ton`→`.brk` alignment uses a 200ms tolerance window
 - Only `>word` lines from `.ala` are used
 - Boundary tone label mapping: `H%`→1 (rising), `L%`/`!H%`→2 (falling), `%`→3 (level), no match→0
 
-**Note on deployment:** BU is used for training and evaluation only and is excluded from the deployed `text2tobi` package model due to fair use restrictions.
+**Note on deployment:** BU is used for evaluation only and is excluded from the deployed `text2tobi` model weights due to licensing constraints.
 
-### Annotation pipeline (LibriTTS silver standard)
+### Annotation pipeline (silver standard)
 
-Since LibriTTS has no human prosody annotations, two independent automatic tools label the audio. A consensus filter then retains only positions where both agree.
+Since LibriTTS and People's Speech have no human prosody annotations, two independent automatic tools label the audio. A consensus filter then retains only positions where both agree.
 
 **Annotator 1 — PSST**
-Built on Whisper, fine-tuned to detect Intonation Unit boundaries. PSST inserts boundary markers directly into its transcription output (`!!!!!`), already word-aligned. Trained on SBCSAE; F1 = 0.87.
+Built on Whisper, fine-tuned to detect Intonation Unit boundaries. PSST inserts boundary markers directly into its transcription output, already word-aligned. Trained on SBCSAE; F1 = 0.87.
 
 PSST never marks utterance-final words as boundaries — a known behaviour arising from its training data. Because utterance-final positions are near-certain prosodic boundaries, a forced consensus fix is applied: any utterance-final word missing a PSST boundary label is assigned one unconditionally, regardless of Wav2ToBI agreement. This is noted explicitly in the annotation metadata.
 
 **Annotator 2 — Wav2ToBI**
-Built on Wav2Vec2 with a bidirectional LSTM and raw F0 appended as an additional feature. Wav2ToBI outputs timestamps in seconds rather than word identities, so a CTC forced alignment model (Wav2Vec2 fine-tuned for ASR) is used to compute word-level timestamps and bridge the gap: if Wav2ToBI places a boundary at 0.54s and forced alignment places `moon` ending at 0.52s, the boundary is assigned to `moon`. Trained on BU Radio News; F1 = 0.86.
+Built on Wav2Vec2 with a bidirectional LSTM and raw F0 appended as an additional feature. Wav2ToBI outputs timestamps in seconds rather than word identities, so a CTC forced alignment model (Wav2Vec2 fine-tuned for ASR) is used to compute word-level timestamps. Trained on BU Radio News; F1 = 0.86.
 
 **Consensus filter**
-Only positions where both annotators agree (within a one-word tolerance window) are retained as boundary labels. The cross-validation of PSST against Wav2ToBI has not been published previously; the agreement rate is itself a reportable finding. **87.3% of utterance-final words received Wav2ToBI corroboration within ±1 word**, validating the silver-standard methodology.
+Only positions where both annotators agree (within a one-word tolerance window) are retained as boundary labels. A stricter metric restricted to positions where at least one system detected a boundary yields 74% symmetric inter-annotator agreement on LibriTTS and 68% on People's Speech. Under the TSP-style metric (which includes non-boundary positions in the denominator), agreement is 94% and 91% respectively.
 
 ---
 
 ## Results
 
-All test F1 figures reported here are evaluated on **SBC001–005** unless otherwise noted. This is the only test configuration directly comparable to the GPT-Neo text-only baseline of F1 = 0.77 (reported in the PSST paper).
+All test F1 figures reported here are evaluated on **SBC001–005** for boundary and intonation, and on the **BU Radio News Corpus** for break index, unless otherwise noted.
 
-LibriTTS random-split results (F1 ~0.87–0.89 on boundary) are not reported as baseline comparisons — the test set overlaps with the training distribution and cannot be meaningfully benchmarked against GPT-Neo.
+### Corpus combination sweep
 
-### Boundary detection
+All runs: punctuation stripped, no POS injection, best BLW per combination.
 
-| Run | Corpus | Loss | POS | Boundary F1 | Precision | Recall |
-|-----|--------|------|-----|-------------|-----------|--------|
-| GPT-Neo (baseline) | SBCSAE | — | — | 0.77 | — | — |
-| `sbc_stl` | SBCSAE | standard | — | **0.8419** | 0.8827 | 0.8048 |
-| `libri+sbc_pos_stl` | LibriTTS + SBCSAE | standard | ✓ | **0.8408** | 0.8883 | 0.7982 |
-| `libri+sbc_stl` | LibriTTS + SBCSAE | standard | — | 0.8225 | 0.8467 | 0.7996 |
-| `libri+sbc_weighted` | LibriTTS + SBCSAE | weighted | — | 0.8149 | 0.7479 | 0.8951 |
+| Model | Corpora | BLW | B-F1 | B-Prec | B-Rec | I-F1 | X-F1 |
+|-------|---------|-----|------|--------|-------|------|------|
+| GPT-Neo 1.2B (baseline) | SBCSAE | — | 0.770 | — | — | — | — |
+| #36 | LibriTTS + People's Speech + SBCSAE | 2.0 | **0.835** | 0.816 | 0.856 | 0.577 | 0.602 |
+| #44 | People's Speech + SBCSAE | 2.0 | 0.833 | 0.830 | 0.835 | 0.537 | 0.590 |
+| #24 | LibriTTS + SBCSAE | 2.0 | 0.824 | 0.787 | 0.865 | 0.557 | 0.604 |
+| #40 | SBCSAE only | 2.0 | 0.823 | 0.796 | 0.852 | 0.554 | 0.375† |
+| #47 | LibriTTS + People's Speech | 5.0 | 0.798 | 0.758 | 0.843 | 0.219 | 0.623 |
+| #51 | People's Speech only | 7.0 | 0.794 | 0.751 | 0.842 | 0.221 | 0.560 |
+| #45 | LibriTTS only | 7.0 | 0.718 | 0.689 | 0.749 | 0.223 | 0.612 |
 
-Both headline configurations beat the baseline. `sbc_stl` trains on SBCSAE alone and achieves the highest boundary F1. `libri+sbc_pos_stl` adds LibriTTS and POS injection; the marginal drop in boundary F1 is accompanied by improved intonation performance, reflecting the benefit of additional data for the harder task.
+†Break index head untrained (SBCSAE contains no break index labels).
 
-Weighted loss consistently shifts the precision/recall tradeoff toward higher recall at the cost of precision — a different operating point rather than a weaker model. It may be preferable in applications where missed boundaries are more costly than false positives.
+B-F1 = boundary F1 (SBCSAE test); I-F1 = intonation F1 (SBCSAE test); X-F1 = break index F1 (BU Radio News).
 
-### Intonation type
+### BLW sweep on full corpus
 
-Intonation F1 is macro-averaged across three classes (rising, falling, level) and evaluated on SBC001–005. There is no prior published text-only baseline for this task.
+Full corpus (LibriTTS + People's Speech + SBCSAE), no POS, no punctuation.
 
-| Run | Intonation F1 |
-|-----|---------------|
-| `sbc_stl` | 0.5942 |
-| `libri+sbc_pos_stl` | 0.5847 |
-| `libri+sbc_weighted` | 0.5708 |
+| Model | BLW | B-F1 | B-Prec | B-Rec | I-F1 | X-F1 |
+|-------|-----|------|--------|-------|------|------|
+| #1 | stl | 0.824 | 0.863 | 0.789 | 0.559 | 0.582 |
+| #38 | 1.5 | 0.833 | 0.834 | 0.832 | 0.563 | 0.576 |
+| #36 | **2.0** | **0.835** | 0.816 | 0.856 | 0.577 | 0.602 |
+| #26 | 3.0 | 0.824 | 0.766 | 0.891 | 0.556 | 0.559 |
+| #9 | 5.0 | 0.812 | 0.729 | 0.915 | 0.537 | **0.647** |
 
-Intonation is a substantially harder task than boundary detection and these figures reflect that. The three-way distinction between rising, falling, and level pitch movements at boundaries carries less syntactic signal than boundary placement itself.
-
-### Break index
-
-Break index F1 is evaluated against LibriTTS silver labels in the validation split. **The SBC001–005 test set contains no break index labels** (Du Bois transcripts do not include ToBI break indices; all positions are masked). A rigorous gold-standard evaluation of break index using BU Radio News corpus annotations is planned before final submission — see Future Directions.
-
-| Run | Break Index F1 |
-|-----|----------------|
-| `sbc_bu_stl` | 0.7125* |
-| `libri+sbc_pos_stl` | — |
-
-*Evaluated against LibriTTS silver val split, not gold test set. Treat with caution.
+Precision decreases and recall increases monotonically as BLW rises. Boundary F1 peaks at BLW=2.0; break index F1 peaks at BLW=5.0.
 
 ### POS ablation
 
-A POS-only run (`libri+sbc_posonly_stl`) — where DistilBERT receives POS abbreviation strings as input text rather than actual words — collapsed to near-majority-class performance (boundary F1 ≈ 0.04). This is a positive scientific finding: POS tags alone carry insufficient information to predict prosodic boundaries, confirming that lexical and contextual information encoded in the actual word sequence is essential. POS features are useful as a supplementary signal (as in `libri+sbc_pos_stl`) but not as a standalone input.
+A POS-only run — where the model receives a stream of part-of-speech tags with no lexical input whatsoever — achieves a boundary F1 of **0.70**, approaching the GPT-Neo baseline of 0.77. This is a positive scientific finding: syntactic structure alone, encoded as a continuous POS sequence with no access to words, is a genuine predictor of prosodic phrasing. This result provides direct empirical support for the syntax-phonology interface literature.
+
+However, adding POS injection as a supplement to the full text-only model produced a near-null result: text+POS configurations did not consistently improve over text-only across any metric. DistilBERT's pretraining appears to have already encoded syntactic category information implicitly through lexical context, rendering the explicit POS signal redundant.
 
 ### Training dynamics
 
@@ -167,29 +169,17 @@ Across all multi-epoch runs, a consistent pattern emerged:
 
 - **Boundary F1** on the validation set typically peaks at **epoch 2–3** and plateaus or slightly degrades thereafter
 - **Intonation F1** on the validation set continues improving through **epoch 5–6**
-- Both metrics continue rising on the **training set** indefinitely, indicating overfitting rather than genuine generalization
 
-The divergence between boundary and intonation head dynamics reflects the relative difficulty of the two tasks. Boundary detection converges quickly on the available signal; intonation classification requires more exposure to learn the subtler distributional patterns. The val F1 / val loss divergence observed in some runs is a calibration artifact — val loss continues falling while val F1 has plateaued — and does not indicate generalization failure.
-
-Overfitting is the primary motivation for expanding the training corpus to include BU Radio News and People's Speech.
-
-### Performance trend across corpora
-
-A slight downward trend in boundary F1 is observable as additional corpora are added (LibriTTS alone: ~0.88; LibriTTS + SBCSAE: ~0.82–0.84; LibriTTS + SBCSAE + BU: ~0.84). Two hypotheses for this pattern are under investigation: increased lexical diversity across domains, and domain mismatch between broadcast news, audiobook, and conversational speech. Results with People's Speech are pending.
-
-![Training curves — sbc_stl](results/sbc_stl_curves.png)
-![Training curves — libri+sbc_pos_stl](results/libri+sbc_pos_stl_curves.png)
+The divergence between boundary and intonation head dynamics reflects the relative difficulty of the two tasks. Boundary detection converges quickly on syntactic cues; intonation classification requires more exposure to learn subtler distributional patterns. Checkpoint selection should treat the two heads independently.
 
 ---
 
 ## Evaluation Validity
 
-The following distinctions are important for interpreting reported numbers:
-
 - **Boundary F1 on SBC001–005** is the only metric directly comparable to the GPT-Neo baseline. All headline comparisons use this figure.
-- **LibriTTS random-split F1** (~0.87–0.89) reflects performance on held-out audiobook data and cannot be compared to the GPT-Neo baseline, which was evaluated on conversational speech.
-- **Break index F1** is currently evaluated against LibriTTS silver labels in the val split. A gold-standard evaluation against BU annotations is in progress.
+- **Break index F1** is evaluated against BU Radio News gold `.brk` annotations. SBCSAE contains no break index labels.
 - **Intonation F1** stands alone — no prior published text-only baseline exists for this task.
+- The original best result of 0.8408 was inflated by a speaker-change token (`/`) data leakage mechanism. The corrected headline is 0.8352.
 
 ---
 
@@ -197,51 +187,51 @@ The following distinctions are important for interpreting reported numbers:
 
 ```
 text2tobi-poc/
+├── cache/                                   # empty on GitHub; populated locally during annotation runs
 ├── code/
 │   ├── annotations/
 │   │   ├── annotation_pipeline_libritts_silver.ipynb
+│   │   ├── annotation_pipeline_peoples_speech_silver.ipynb
 │   │   ├── annotation_pipeline_sbcsae.ipynb
 │   │   ├── annotation_pipeline_bu.ipynb
-│   │   ├── annotation_pipeline_peoples_speech_silver.ipynb
 │   │   ├── parameter_tuning_w2t.ipynb
 │   │   ├── crossref_bu.py
 │   │   └── verify_bu_pipeline.py
-│   └── model/
-│       ├── distilBERT_pos.ipynb          # main training notebook (current)
-│       ├── distilBERT_multitrain_v2.ipynb
-│       ├── distilBERT.ipynb              # early single-task baseline
-│       └── run_summary.ipynb
-├── runs/                                 # complete experimental record
-│   ├── sbc/
-│   ├── libri/
-│   ├── libri+sbc/
-│   ├── libri+sbc+bu/
-│   └── sbc+bu/
-│       └── {run_id}/
-│           ├── {run_id}_curves.png
-│           ├── {run_id}_confusion_matrix.png
-│           └── {run_id}_hparams.json
-│           # checkpoint/ excluded — see HuggingFace Hub note below
-├── results/                              # curated highlights
-│   ├── sbc_stl_curves.png
-│   ├── sbc_stl_confusion_matrix.png
-│   ├── libri+sbc_pos_stl_curves.png
-│   ├── libri+sbc_pos_stl_confusion_matrix.png
-│   ├── libri+sbc_posonly_stl_curves.png  # POS-only collapse
+│   ├── model/
+│   │   ├── distilBERT_multitrain.ipynb   # main training notebook
+│   │   └── run_summary.ipynb             # iterates models/ and creates report
+│   └── other/                            # misc code (tons actually, most excluded)
+│       └── ...
+├── labels/
+│   ├── bu/                                  # BU Radio News gold labels
+│   ├── clean-100/                           # LibriTTS clean-100 silver labels
+│   ├── clean-360/                           # LibriTTS clean-360 silver labels
+│   ├── ps/                                  # People's Speech silver labels
+│   └── sbcsae/                              # SBCSAE gold labels
+├── models/
+│   ├── full/                                # one folder per completed run
+│   │   └── {run_id}/
+│   │       ├── {run_id}_hparams.json
+│   │       ├── {run_id}_curves.png
+│   │       └── {run_id}_confusion_matrix.png
+│   │
+│   ├── partial/                             # interrupted or exploratory runs
+│   │   └── {run_id}/
+│   ├── model_registry.json
 │   └── runs_summary.xlsx
 └── README.md
 ```
 
-**Model weights** are not included in this repository due to file size. Checkpoints for `sbc_stl` and `libri+sbc_pos_stl` will be uploaded to HuggingFace Hub — link to follow.
+**Model weights** are not included in this repository due to file size. The best-performing model (Model #36) is publicly available on HuggingFace under the Apache 2.0 license: [`lemmalei/text2tobi`](https://huggingface.co/lemmalei/text2tobi).
 
 ### Environment
 
 All notebooks are designed for **Google Colab with a T4 GPU**. Data and label files live on Google Drive and are mounted at the start of each session. No local GPU is required.
 
-Dependencies are installed inline by each notebook's Cell 2:
+Dependencies are installed inline by each notebook's setup cell:
 
 ```
-transformers datasets scikit-learn matplotlib spacy
+transformers datasets scikit-learn matplotlib spacy evaluate
 ```
 
 ### Wav2ToBI patches (required every session)
@@ -276,66 +266,43 @@ from evaluate import load as load_metric
 
 The `load_metric` function was moved from `datasets` to the `evaluate` package in a breaking API change. Without this patch, importing Wav2ToBI raises an `ImportError`.
 
-Both patches survive for the duration of the Colab session but are lost on runtime restart. If you are running annotation notebooks in sequence within a single session, the patches only need to be applied once.
+Both patches survive for the duration of the Colab session but are lost on runtime restart.
 
 ### Running the pipeline
 
 1. Apply the Wav2ToBI patches above.
 2. Run the relevant annotation notebook(s) for your target corpus. Label files are written to Google Drive under `labels/{corpus}/`.
-3. Open `distilBERT_pos.ipynb`. Edit **Cell 1** only — set corpus paths, POS flags, loss strategy, and run notes.
-4. Run all cells top to bottom. The multi-run harness in Cell 14 accepts a `RUNS` list for batched experiments.
-5. Results and checkpoints are saved to `runs/{run_id}/` on Drive, including `hparams.json`, `test_predictions.json`, `curves.png`, and `confusion_matrix.png`.
-
-### Drive folder structure
-
-```
-/MyDrive/Capstone/project/
-├── labels/
-│   ├── clean-100/       # LibriTTS clean-100 silver labels
-│   ├── clean-360/       # LibriTTS clean-360 silver labels
-│   ├── sbcsae/          # SBCSAE gold labels
-│   └── bu/              # BU Radio News gold labels
-└── runs/
-    └── {run_id}/
-        ├── checkpoint/          # HuggingFace model weights + tokenizer
-        ├── {run_id}_hparams.json
-        ├── {run_id}_test_predictions.json
-        ├── {run_id}_curves.png
-        └── {run_id}_confusion_matrix.png
-```
-
-Label files are excluded from this repository and must be regenerated by running the annotation notebooks. They can also be obtained from HuggingFace Datasets / Zenodo (see Citation and Licensing).
+3. Open `distilBERT_multitrain_v2.ipynb`. Edit the configuration cell — set corpus paths, loss strategy, BLW, and run notes.
+4. Run all cells top to bottom.
+5. Results are saved to `models/{run_id}/` on Drive, including `hparams.json`, `curves.png`, and `confusion_matrix.png`.
 
 ---
 
 ## Limitations
 
-- **Break index evaluation** lacks a gold-standard test set. Current figures are against LibriTTS silver labels in the val split. This is being addressed before final submission.
-- **Domain coverage** is limited to audiobook (LibriTTS), spontaneous conversational (SBCSAE), and broadcast news (BU) speech. Generalization to other registers is not yet tested.
-- **Silver-standard noise:** LibriTTS labels are automatic and retain some annotation error despite the consensus filter. The 87.3% Wav2ToBI corroboration rate is high but not perfect.
-- **POS contribution** is not yet fully quantified. The difference between `libri+sbc_stl` and `libri+sbc_pos_stl` is modest and warrants further controlled ablation.
-- **BU corpus excluded from deployment** due to fair use constraints. The deployable model in `text2tobi` is trained on LibriTTS and SBCSAE only.
+- **Domain coverage** is limited to audiobook (LibriTTS), conversational (SBCSAE), broadcast news (BU), and mixed Internet audio (People's Speech). Generalization to other registers — telephony, noisy speech, stylized registers — is not tested.
+- **Silver-standard noise:** automatic labels retain some annotation error despite the consensus filter. PSST and Wav2ToBI disagree on at least 26% of positions in LibriTTS and 32% in People's Speech where at least one model detects a boundary. Consensus filtering discards these positions entirely, which may bias the training distribution toward high-confidence boundaries.
+- **POS contribution** is unobservable: the POS embedding is never supervised independently, making it difficult to determine whether it contributes signal or is simply ignored. The near-null text+POS result suggests DistilBERT's pretraining already encodes syntactic structure implicitly.
 
 ---
 
 ## Future Directions
 
-- **Gold-standard break index evaluation:** use BU Radio News `.brk` annotations as a proper val/test set for the break index head, mirroring the SBC001–005 methodology for boundary F1
-- **People's Speech expansion:** preliminary results on a partial People's Speech clean subset are in progress; the corpus is large enough to substantially increase training data and may reduce overfitting
-- **POS contribution quantification:** controlled ablation isolating the effect of POS injection at different corpus scales
-- **Continued BU integration:** full training runs including BU for boundary and intonation, pending fair use resolution for the deployed model
-- **Deployment:** a pip-installable CLI and Python API are in development in the [`text2tobi`](https://github.com/your-handle/text2tobi) repository
+- **Checkpoint selection per head:** per-epoch analysis consistently shows boundary and intonation heads peaking at different epochs. Selecting checkpoints independently per head would likely yield gains without additional training.
+- **Extended intonation head:** intonation direction is currently predicted only at boundary positions. A full SSML-compatible transcription would require pitch accent and word-level prominence as additional heads.
+- **Targeted corpus expansion:** People's Speech domain composition is heterogeneous and undocumented. Higher-quality or domain-filtered subsets, or additional conversational corpora matching the SBCSAE register, may further close the SBC/non-SBC gap.
+- **Python package deployment:** model weights are available on HuggingFace; packaging as a pip-installable library would lower the barrier to adoption for TTS front-ends and corpus annotation pipelines.
 
 ---
 
 ## Citation and Licensing
 
-This repository is released under **CC BY-NC 4.0**. Label files are excluded from the repository; dataset artifacts are available via HuggingFace Datasets and Zenodo.
+This repository is released under Apache 2.0. Model weights are separately licensed under Apache 2.0 at [`lemmalei/text2tobi`](https://huggingface.co/lemmalei/text2tobi).
 
-Code generation assistance provided by Claude Sonnet 3.5/4.6 (Anthropic, 2026). Prompts, design decisions, and verification by the author.
+Code generation assistance provided by Claude Sonnet 4.6 (Anthropic, 2026). Prompts, design decisions, and verification by the author.
 
 **Models used:**
 - `distilbert-base-uncased` — Sanh et al. (2019)
-- `NathanRoll/psst-medium-en` — PSST
-- `ReginaZ/Wav2ToBI-PB-Fuzzy` — Wav2ToBI
+- `NathanRoll/psst-medium-en` — Roll et al. (2023)
+- `ReginaZ/Wav2ToBI-PB-Fuzzy` — Zhai & Hasegawa-Johnson (2023)
 - `en_core_web_sm` — spaCy

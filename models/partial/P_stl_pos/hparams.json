@@ -1,0 +1,230 @@
+{
+  "run_id": "P_stl_pos",
+  "run_notes": "",
+  "timestamp": "2026-06-17T06:51:31.503751",
+  "data": {
+    "datasets": [
+      "ps"
+    ],
+    "n_samples_train_pool": 130845,
+    "n_train": 116334,
+    "n_val": 14511,
+    "n_test": 383,
+    "n_words_by_corpus": {
+      "ps": 4919077
+    },
+    "n_words_total": 4919077,
+    "n_words_val_by_corpus": {
+      "ps": 546571
+    },
+    "n_words_val_total": 546571,
+    "n_words_train_total": 4372506,
+    "split_mode": "fixed_sbc_holdout",
+    "split_seed": 42,
+    "train_frac": 0.8,
+    "val_frac": 0.1
+  },
+  "preprocessing": {
+    "strip_punctuation": true,
+    "train_on_text": true,
+    "train_on_pos": true,
+    "pos_embedding_dim": 64,
+    "extra_features": [],
+    "max_length": 128
+  },
+  "model": {
+    "base": "distilbert-base-uncased",
+    "use_pos_embedding": true,
+    "pos_emb_dim": 64,
+    "num_pos_tags": 19,
+    "hidden_size": 768,
+    "n_trainable_params": 66418631
+  },
+  "versions": {
+    "transformers": "5.10.2",
+    "torch": "2.11.0+cu128",
+    "spacy": "3.8.14",
+    "cuda": "12.8"
+  },
+  "training": {
+    "batch_size": 16,
+    "learning_rate": 2e-05,
+    "num_epochs": 6,
+    "warmup_steps": 0,
+    "weight_decay": 0.01,
+    "imbalance_strategy": "none",
+    "boundary_loss_weight": 5.0,
+    "boundary_task_weight": 1.0,
+    "intonation_task_weight": 1.0,
+    "break_idx_task_weight": 1.0,
+    "best_epoch": 4
+  },
+  "results": {
+    "best_val_boundary_f1": 0.7286437595241606,
+    "test": {
+      "boundary": {
+        "f1": 0.6005586592178771,
+        "precision": 0.9028440542088185,
+        "recall": 0.44991914772186814
+      },
+      "intonation": {
+        "f1": 0.231707064360643,
+        "precision": 0.3704300556798021,
+        "recall": 0.34465122124655917
+      },
+      "break_idx": {
+        "f1": NaN,
+        "precision": NaN,
+        "recall": NaN
+      }
+    },
+    "bu_eval": {
+      "f1": 0.5697988872266133,
+      "precision": 0.5935051516856156,
+      "recall": 0.6067437429189412
+    },
+    "intonation_checkpoint": {
+      "enabled": true,
+      "best_intonation_epoch": 6,
+      "best_val_intonation_f1": 0.3830345910361954,
+      "test": {
+        "boundary": {
+          "f1": 0.6056738484867631,
+          "precision": 0.9019570944674444,
+          "recall": 0.45591172833634547
+        },
+        "intonation": {
+          "f1": 0.23460002957165105,
+          "precision": 0.3708337703530229,
+          "recall": 0.3417343618853526
+        },
+        "break_idx": {
+          "f1": NaN,
+          "precision": NaN,
+          "recall": NaN
+        }
+      },
+      "bu_eval": {
+        "f1": 0.5553151965762682,
+        "precision": 0.5857955483252143,
+        "recall": 0.5969850678951023
+      }
+    },
+    "per_epoch_test": {
+      "2": {
+        "val_boundary_f1": 0.7263068254958461,
+        "test_boundary_f1": 0.5785510257076084,
+        "test_boundary_precision": 0.9110611326927008,
+        "test_boundary_recall": 0.42385617806525255
+      },
+      "3": {
+        "val_boundary_f1": 0.7267603956859515,
+        "test_boundary_f1": 0.6011700368815973,
+        "test_boundary_precision": 0.9067715327066947,
+        "test_boundary_recall": 0.44963378674022636
+      },
+      "4": {
+        "val_boundary_f1": 0.7286437595241606,
+        "test_boundary_f1": 0.6005586592178771,
+        "test_boundary_precision": 0.9028440542088185,
+        "test_boundary_recall": 0.44991914772186814
+      },
+      "5": {
+        "val_boundary_f1": 0.7283752083917322,
+        "test_boundary_f1": 0.5982165605095542,
+        "test_boundary_precision": 0.9053402737613264,
+        "test_boundary_recall": 0.4466850565965947
+      },
+      "6": {
+        "val_boundary_f1": 0.7285386929150086,
+        "test_boundary_f1": 0.6056738484867631,
+        "test_boundary_precision": 0.9019570944674444,
+        "test_boundary_recall": 0.45591172833634547
+      }
+    },
+    "val_history": {
+      "loss": [
+        1.7921209960945912,
+        1.7840006045233192,
+        1.7871829715558423,
+        1.8045312389649262,
+        1.8278866748694154,
+        1.851859119524635
+      ],
+      "boundary_f1": [
+        0.7228889330419233,
+        0.7263068254958461,
+        0.7267603956859515,
+        0.7286437595241606,
+        0.7283752083917322,
+        0.7285386929150086
+      ],
+      "boundary_prec": [
+        0.7941718963165075,
+        0.794826782831074,
+        0.79722243385322,
+        0.7906758414679682,
+        0.7907803690415172,
+        0.7888992795052178
+      ],
+      "boundary_rec": [
+        0.6633483750398833,
+        0.6686631113542094,
+        0.6677423765896349,
+        0.6756369934819272,
+        0.675099138520443,
+        0.6767582843338347
+      ],
+      "intonation_f1": [
+        0.30519418328950193,
+        0.34325437253337315,
+        0.34432036105832364,
+        0.3756521506245478,
+        0.3792394424718792,
+        0.3830345910361954
+      ],
+      "break_idx_f1": [
+        0.6067791583539781,
+        0.6067018811198153,
+        0.628694643043222,
+        0.6262219865210354,
+        0.6246926748111097,
+        0.6241119318173072
+      ]
+    },
+    "train_history": {
+      "loss": [
+        1.825568257311387,
+        1.7685671484039174,
+        1.7249015987107947,
+        1.6808430239416812,
+        1.6382849698315263,
+        1.6054160365243837
+      ],
+      "boundary_f1": [
+        0.7046156728075287,
+        0.7265858596651878,
+        0.7340981116391605,
+        0.7376417121545187,
+        0.7401510124643251,
+        0.7415096083348223
+      ],
+      "intonation_f1": [
+        0.2701854285261176,
+        0.31646406604801,
+        0.35918491577089173,
+        0.39992829298875804,
+        0.4334963856098785,
+        0.45690564902952907
+      ],
+      "break_idx_f1": [
+        0.5900257717268094,
+        0.6246962802541031,
+        0.6490958144205732,
+        0.6709217445111851,
+        0.6904868992220743,
+        0.7040514509047555
+      ]
+    }
+  }
+}

@@ -1,0 +1,880 @@
+{
+  "1": {
+    "name": "LPS_stl",
+    "path": "full/LPS_stl",
+    "datasets": [
+      "sbc",
+      "libri",
+      "ps"
+    ],
+    "loss": "standard",
+    "train_on_text": true,
+    "train_on_pos": false,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": "",
+    "boundary_loss_weight": null
+  },
+  "2": {
+    "name": "LP_stl",
+    "path": "partial/LP_stl",
+    "datasets": [
+      "libri",
+      "ps"
+    ],
+    "loss": "standard",
+    "train_on_text": true,
+    "train_on_pos": false,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": "",
+    "boundary_loss_weight": null
+  },
+  "3": {
+    "name": "LS_stl",
+    "path": "partial/LS_stl",
+    "datasets": [
+      "sbc",
+      "libri"
+    ],
+    "loss": "standard",
+    "train_on_text": true,
+    "train_on_pos": false,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": "",
+    "boundary_loss_weight": null
+  },
+  "4": {
+    "name": "L_stl",
+    "path": "partial/L_stl",
+    "datasets": [
+      "libri"
+    ],
+    "loss": "standard",
+    "train_on_text": true,
+    "train_on_pos": false,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": "",
+    "boundary_loss_weight": null
+  },
+  "5": {
+    "name": "P_stl",
+    "path": "partial/P_stl",
+    "datasets": [
+      "ps"
+    ],
+    "loss": "standard",
+    "train_on_text": true,
+    "train_on_pos": false,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": "",
+    "boundary_loss_weight": null
+  },
+  "6": {
+    "name": "S_stl",
+    "path": "partial/S_stl",
+    "datasets": [
+      "sbc"
+    ],
+    "loss": "standard",
+    "train_on_text": true,
+    "train_on_pos": false,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": "",
+    "boundary_loss_weight": null
+  },
+  "7": {
+    "name": "PS_stl",
+    "path": "partial/PS_stl",
+    "datasets": [
+      "sbc",
+      "ps"
+    ],
+    "loss": "standard",
+    "train_on_text": true,
+    "train_on_pos": false,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": "",
+    "boundary_loss_weight": null
+  },
+  "8": {
+    "name": "LS_stl_pos",
+    "path": "partial/LS_stl_pos",
+    "datasets": [
+      "sbc",
+      "libri"
+    ],
+    "loss": "standard",
+    "train_on_text": true,
+    "train_on_pos": true,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": "",
+    "boundary_loss_weight": null
+  },
+  "9": {
+    "name": "LPS_wl",
+    "path": "full/LPS_wl",
+    "datasets": [
+      "sbc",
+      "libri",
+      "ps"
+    ],
+    "loss": "weighted",
+    "train_on_text": true,
+    "train_on_pos": false,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": "",
+    "boundary_loss_weight": 5.0
+  },
+  "10": {
+    "name": "LPS_stl_pos",
+    "path": "full/LPS_stl_pos",
+    "datasets": [
+      "sbc",
+      "libri",
+      "ps"
+    ],
+    "loss": "standard",
+    "train_on_text": true,
+    "train_on_pos": true,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": "",
+    "boundary_loss_weight": null
+  },
+  "11": {
+    "name": "LPS_wl_pos",
+    "path": "full/LPS_wl_pos",
+    "datasets": [
+      "sbc",
+      "libri",
+      "ps"
+    ],
+    "loss": "weighted",
+    "train_on_text": true,
+    "train_on_pos": true,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": "",
+    "boundary_loss_weight": 5.0
+  },
+  "12": {
+    "name": "PS_stl_pos",
+    "path": "partial/PS_stl_pos",
+    "datasets": [
+      "sbc",
+      "ps"
+    ],
+    "loss": "standard",
+    "train_on_text": true,
+    "train_on_pos": true,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": "",
+    "boundary_loss_weight": null
+  },
+  "13": {
+    "name": "LS_stl_pos_2",
+    "path": "partial/LS_stl_pos_2",
+    "datasets": [
+      "sbc",
+      "libri"
+    ],
+    "loss": "standard",
+    "train_on_text": true,
+    "train_on_pos": true,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": "",
+    "boundary_loss_weight": null
+  },
+  "14": {
+    "name": "S_stl_pos",
+    "path": "partial/S_stl_pos",
+    "datasets": [
+      "sbc"
+    ],
+    "loss": "standard",
+    "train_on_text": true,
+    "train_on_pos": true,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": "",
+    "boundary_loss_weight": null
+  },
+  "15": {
+    "name": "L_stl_pos",
+    "path": "partial/L_stl_pos",
+    "datasets": [
+      "libri"
+    ],
+    "loss": "standard",
+    "train_on_text": true,
+    "train_on_pos": true,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": "",
+    "boundary_loss_weight": null
+  },
+  "16": {
+    "name": "P_stl_pos",
+    "path": "partial/P_stl_pos",
+    "datasets": [
+      "ps"
+    ],
+    "loss": "standard",
+    "train_on_text": true,
+    "train_on_pos": true,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": "",
+    "boundary_loss_weight": null
+  },
+  "17": {
+    "name": "LP_stl_pos",
+    "path": "partial/LP_stl_pos",
+    "datasets": [
+      "libri",
+      "ps"
+    ],
+    "loss": "standard",
+    "train_on_text": true,
+    "train_on_pos": true,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": "",
+    "boundary_loss_weight": null
+  },
+  "18": {
+    "name": "S_wl",
+    "path": "partial/S_wl",
+    "datasets": [
+      "sbc"
+    ],
+    "loss": "weighted",
+    "train_on_text": true,
+    "train_on_pos": false,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": "",
+    "boundary_loss_weight": 5.0
+  },
+  "19": {
+    "name": "LS_wl",
+    "path": "partial/LS_wl",
+    "datasets": [
+      "sbc",
+      "libri"
+    ],
+    "loss": "weighted",
+    "train_on_text": true,
+    "train_on_pos": false,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": "",
+    "boundary_loss_weight": 5.0
+  },
+  "20": {
+    "name": "PS_wl",
+    "path": "partial/PS_wl",
+    "datasets": [
+      "sbc",
+      "ps"
+    ],
+    "loss": "weighted",
+    "train_on_text": true,
+    "train_on_pos": false,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": "",
+    "boundary_loss_weight": 5.0
+  },
+  "21": {
+    "name": "L_wl",
+    "path": "partial/L_wl",
+    "datasets": [
+      "libri"
+    ],
+    "loss": "weighted",
+    "train_on_text": true,
+    "train_on_pos": false,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": "",
+    "boundary_loss_weight": 5.0
+  },
+  "22": {
+    "name": "LS_wl_2",
+    "path": "partial/LS_wl_2",
+    "datasets": [
+      "sbc",
+      "libri"
+    ],
+    "loss": "weighted",
+    "train_on_text": true,
+    "train_on_pos": false,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": "",
+    "boundary_loss_weight": 3.0
+  },
+  "23": {
+    "name": "LS_wl_3",
+    "path": "partial/LS_wl_3",
+    "datasets": [
+      "sbc",
+      "libri"
+    ],
+    "loss": "weighted",
+    "train_on_text": true,
+    "train_on_pos": false,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": "",
+    "boundary_loss_weight": 8.0
+  },
+  "24": {
+    "name": "LS_wl2",
+    "path": "partial/LS_wl2",
+    "datasets": [
+      "sbc",
+      "libri"
+    ],
+    "loss": "weighted",
+    "boundary_loss_weight": 2.0,
+    "train_on_text": true,
+    "train_on_pos": false,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": ""
+  },
+  "25": {
+    "name": "LS_wl4",
+    "path": "partial/LS_wl4",
+    "datasets": [
+      "sbc",
+      "libri"
+    ],
+    "loss": "weighted",
+    "boundary_loss_weight": 4.0,
+    "train_on_text": true,
+    "train_on_pos": false,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": ""
+  },
+  "26": {
+    "name": "LPS_wl3",
+    "path": "full/LPS_wl3",
+    "datasets": [
+      "sbc",
+      "libri",
+      "ps"
+    ],
+    "loss": "weighted",
+    "boundary_loss_weight": 3.0,
+    "train_on_text": true,
+    "train_on_pos": false,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": ""
+  },
+  "27": {
+    "name": "S_wl3",
+    "path": "partial/S_wl3",
+    "datasets": [
+      "sbc"
+    ],
+    "loss": "weighted",
+    "boundary_loss_weight": 3.0,
+    "train_on_text": true,
+    "train_on_pos": false,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": ""
+  },
+  "28": {
+    "name": "L_wl3",
+    "path": "partial/L_wl3",
+    "datasets": [
+      "libri"
+    ],
+    "loss": "weighted",
+    "boundary_loss_weight": 3.0,
+    "train_on_text": true,
+    "train_on_pos": false,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": ""
+  },
+  "29": {
+    "name": "P_wl3",
+    "path": "partial/P_wl3",
+    "datasets": [
+      "ps"
+    ],
+    "loss": "weighted",
+    "boundary_loss_weight": 3.0,
+    "train_on_text": true,
+    "train_on_pos": false,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": ""
+  },
+  "30": {
+    "name": "LP_wl3",
+    "path": "partial/LP_wl3",
+    "datasets": [
+      "libri",
+      "ps"
+    ],
+    "loss": "weighted",
+    "boundary_loss_weight": 3.0,
+    "train_on_text": true,
+    "train_on_pos": false,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": ""
+  },
+  "31": {
+    "name": "PS_wl3",
+    "path": "partial/PS_wl3",
+    "datasets": [
+      "ps",
+      "sbc"
+    ],
+    "loss": "weighted",
+    "boundary_loss_weight": 3.0,
+    "train_on_text": true,
+    "train_on_pos": false,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": ""
+  },
+  "32": {
+    "name": "L_wl5",
+    "path": "partial/L_wl5",
+    "datasets": [
+      "libri"
+    ],
+    "loss": "weighted",
+    "boundary_loss_weight": 5.0,
+    "train_on_text": true,
+    "train_on_pos": false,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": ""
+  },
+  "33": {
+    "name": "LPS_stl_pp",
+    "path": "full/LPS_stl_pp",
+    "datasets": [
+      "sbc",
+      "libri",
+      "ps"
+    ],
+    "loss": "standard",
+    "boundary_loss_weight": null,
+    "train_on_text": true,
+    "train_on_pos": false,
+    "strip_punctuation": false,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": ""
+  },
+  "34": {
+    "name": "LPS_wl3_pp",
+    "path": "full/LPS_wl3_pp",
+    "datasets": [
+      "sbc",
+      "libri",
+      "ps"
+    ],
+    "loss": "weighted",
+    "boundary_loss_weight": 3.0,
+    "train_on_text": true,
+    "train_on_pos": false,
+    "strip_punctuation": false,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": ""
+  },
+  "35": {
+    "name": "LPS_wl2_pp",
+    "path": "full/LPS_wl2_pp",
+    "datasets": [
+      "sbc",
+      "libri",
+      "ps"
+    ],
+    "loss": "weighted",
+    "boundary_loss_weight": 2.0,
+    "train_on_text": true,
+    "train_on_pos": false,
+    "strip_punctuation": false,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": ""
+  },
+  "36": {
+    "name": "LPS_wl2",
+    "path": "full/LPS_wl2",
+    "datasets": [
+      "sbc",
+      "libri",
+      "ps"
+    ],
+    "loss": "weighted",
+    "boundary_loss_weight": 2.0,
+    "train_on_text": true,
+    "train_on_pos": false,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": ""
+  },
+  "37": {
+    "name": "LPS_wl2_pos",
+    "path": "full/LPS_wl2_pos",
+    "datasets": [
+      "sbc",
+      "libri",
+      "ps"
+    ],
+    "loss": "weighted",
+    "boundary_loss_weight": 2.0,
+    "train_on_text": true,
+    "train_on_pos": true,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": ""
+  },
+  "38": {
+    "name": "LPS_wl1p5",
+    "path": "full/LPS_wl1p5",
+    "datasets": [
+      "sbc",
+      "libri",
+      "ps"
+    ],
+    "loss": "weighted",
+    "boundary_loss_weight": 1.5,
+    "train_on_text": true,
+    "train_on_pos": false,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": ""
+  },
+  "39": {
+    "name": "LS_wl1p5",
+    "path": "partial/LS_wl1p5",
+    "datasets": [
+      "sbc",
+      "libri"
+    ],
+    "loss": "weighted",
+    "boundary_loss_weight": 1.5,
+    "train_on_text": true,
+    "train_on_pos": false,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": ""
+  },
+  "40": {
+    "name": "S_wl2",
+    "path": "partial/S_wl2",
+    "datasets": [
+      "sbc"
+    ],
+    "loss": "weighted",
+    "boundary_loss_weight": 2.0,
+    "train_on_text": true,
+    "train_on_pos": false,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": ""
+  },
+  "41": {
+    "name": "L_wl2",
+    "path": "partial/L_wl2",
+    "datasets": [
+      "libri"
+    ],
+    "loss": "weighted",
+    "boundary_loss_weight": 2.0,
+    "train_on_text": true,
+    "train_on_pos": false,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": ""
+  },
+  "42": {
+    "name": "P_wl2",
+    "path": "partial/P_wl2",
+    "datasets": [
+      "ps"
+    ],
+    "loss": "weighted",
+    "boundary_loss_weight": 2.0,
+    "train_on_text": true,
+    "train_on_pos": false,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": ""
+  },
+  "43": {
+    "name": "LP_wl2",
+    "path": "partial/LP_wl2",
+    "datasets": [
+      "libri",
+      "ps"
+    ],
+    "loss": "weighted",
+    "boundary_loss_weight": 2.0,
+    "train_on_text": true,
+    "train_on_pos": false,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": ""
+  },
+  "44": {
+    "name": "PS_wl2",
+    "path": "partial/PS_wl2",
+    "datasets": [
+      "ps",
+      "sbc"
+    ],
+    "loss": "weighted",
+    "boundary_loss_weight": 2.0,
+    "train_on_text": true,
+    "train_on_pos": false,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": ""
+  },
+  "45": {
+    "name": "L_wl7",
+    "path": "partial/L_wl7",
+    "datasets": [
+      "libri"
+    ],
+    "loss": "weighted",
+    "boundary_loss_weight": 7.0,
+    "train_on_text": true,
+    "train_on_pos": false,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": ""
+  },
+  "46": {
+    "name": "P_wl5",
+    "path": "partial/P_wl5",
+    "datasets": [
+      "ps"
+    ],
+    "loss": "weighted",
+    "boundary_loss_weight": 5.0,
+    "train_on_text": true,
+    "train_on_pos": false,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": ""
+  },
+  "47": {
+    "name": "LP_wl5",
+    "path": "partial/LP_wl5",
+    "datasets": [
+      "libri",
+      "ps"
+    ],
+    "loss": "weighted",
+    "boundary_loss_weight": 5.0,
+    "train_on_text": true,
+    "train_on_pos": false,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": ""
+  },
+  "48": {
+    "name": "LPS_wl2_posonly",
+    "path": "full/LPS_wl2_posonly",
+    "datasets": [
+      "sbc",
+      "libri",
+      "ps"
+    ],
+    "loss": "weighted",
+    "boundary_loss_weight": 2.0,
+    "train_on_text": false,
+    "train_on_pos": true,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": ""
+  },
+  "49": {
+    "name": "LPS_stl_posonly",
+    "path": "full/LPS_stl_posonly",
+    "datasets": [
+      "sbc",
+      "libri",
+      "ps"
+    ],
+    "loss": "standard",
+    "boundary_loss_weight": null,
+    "train_on_text": false,
+    "train_on_pos": true,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": ""
+  },
+  "50": {
+    "name": "LP_wl7",
+    "path": "partial/LP_wl7",
+    "datasets": [
+      "libri",
+      "ps"
+    ],
+    "loss": "weighted",
+    "boundary_loss_weight": 7.0,
+    "train_on_text": true,
+    "train_on_pos": false,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": ""
+  },
+  "51": {
+    "name": "P_wl7",
+    "path": "partial/P_wl7",
+    "datasets": [
+      "ps"
+    ],
+    "loss": "weighted",
+    "boundary_loss_weight": 7.0,
+    "train_on_text": true,
+    "train_on_pos": false,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": ""
+  },
+  "52": {
+    "name": "L_wl7_2",
+    "path": "partial/L_wl7_2",
+    "datasets": [
+      "libri"
+    ],
+    "loss": "weighted",
+    "boundary_loss_weight": 7.0,
+    "train_on_text": true,
+    "train_on_pos": false,
+    "strip_punctuation": true,
+    "learning_rate": 2e-05,
+    "warmup_steps": 0,
+    "num_epochs": 6,
+    "run_notes": ""
+  }
+}

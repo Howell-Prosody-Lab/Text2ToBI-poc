@@ -1,0 +1,230 @@
+{
+  "run_id": "L_wl",
+  "run_notes": "",
+  "timestamp": "2026-06-17T08:45:55.117678",
+  "data": {
+    "datasets": [
+      "libri"
+    ],
+    "n_samples_train_pool": 145111,
+    "n_train": 128966,
+    "n_val": 16145,
+    "n_test": 383,
+    "n_words_by_corpus": {
+      "libri": 2564256
+    },
+    "n_words_total": 2564256,
+    "n_words_val_by_corpus": {
+      "libri": 284955
+    },
+    "n_words_val_total": 284955,
+    "n_words_train_total": 2279301,
+    "split_mode": "fixed_sbc_holdout",
+    "split_seed": 42,
+    "train_frac": 0.8,
+    "val_frac": 0.1
+  },
+  "preprocessing": {
+    "strip_punctuation": true,
+    "train_on_text": true,
+    "train_on_pos": false,
+    "pos_embedding_dim": null,
+    "extra_features": [],
+    "max_length": 128
+  },
+  "model": {
+    "base": "distilbert-base-uncased",
+    "use_pos_embedding": false,
+    "pos_emb_dim": null,
+    "num_pos_tags": null,
+    "hidden_size": 768,
+    "n_trainable_params": 66368263
+  },
+  "versions": {
+    "transformers": "5.10.2",
+    "torch": "2.11.0+cu128",
+    "spacy": null,
+    "cuda": "12.8"
+  },
+  "training": {
+    "batch_size": 16,
+    "learning_rate": 2e-05,
+    "num_epochs": 6,
+    "warmup_steps": 0,
+    "weight_decay": 0.01,
+    "imbalance_strategy": "weighted_loss",
+    "boundary_loss_weight": 5.0,
+    "boundary_task_weight": 1.0,
+    "intonation_task_weight": 1.0,
+    "break_idx_task_weight": 1.0,
+    "best_epoch": 3
+  },
+  "results": {
+    "best_val_boundary_f1": 0.862855957259194,
+    "test": {
+      "boundary": {
+        "f1": 0.7093268053855569,
+        "precision": 0.7308313155770783,
+        "recall": 0.6890516503376771
+      },
+      "intonation": {
+        "f1": 0.23090335993561797,
+        "precision": 0.17506274001704195,
+        "recall": 0.3443160396688796
+      },
+      "break_idx": {
+        "f1": NaN,
+        "precision": NaN,
+        "recall": NaN
+      }
+    },
+    "bu_eval": {
+      "f1": 0.6145582158300505,
+      "precision": 0.6396801903370968,
+      "recall": 0.6094888472285442
+    },
+    "intonation_checkpoint": {
+      "enabled": true,
+      "best_intonation_epoch": 6,
+      "best_val_intonation_f1": 0.40401193569563176,
+      "test": {
+        "boundary": {
+          "f1": 0.7081629708018664,
+          "precision": 0.7163293110159595,
+          "recall": 0.7001807286217064
+        },
+        "intonation": {
+          "f1": 0.2220201307596691,
+          "precision": 0.33537661016411957,
+          "recall": 0.3520577649037542
+        },
+        "break_idx": {
+          "f1": NaN,
+          "precision": NaN,
+          "recall": NaN
+        }
+      },
+      "bu_eval": {
+        "f1": 0.6179522636574102,
+        "precision": 0.6158331074639901,
+        "recall": 0.6256168412081906
+      }
+    },
+    "per_epoch_test": {
+      "2": {
+        "val_boundary_f1": 0.850782890243594,
+        "test_boundary_f1": 0.719588858807874,
+        "test_boundary_precision": 0.6951241134751773,
+        "test_boundary_recall": 0.7458384856843907
+      },
+      "3": {
+        "val_boundary_f1": 0.862855957259194,
+        "test_boundary_f1": 0.7093268053855569,
+        "test_boundary_precision": 0.7308313155770783,
+        "test_boundary_recall": 0.6890516503376771
+      },
+      "4": {
+        "val_boundary_f1": 0.858939601921757,
+        "test_boundary_f1": 0.7097852028639619,
+        "test_boundary_precision": 0.7123694548241832,
+        "test_boundary_recall": 0.7072196328355369
+      },
+      "5": {
+        "val_boundary_f1": 0.8597615126615566,
+        "test_boundary_f1": 0.7109583810614738,
+        "test_boundary_precision": 0.7134783025193984,
+        "test_boundary_recall": 0.708456197089318
+      },
+      "6": {
+        "val_boundary_f1": 0.8604846024273313,
+        "test_boundary_f1": 0.7081629708018664,
+        "test_boundary_precision": 0.7163293110159595,
+        "test_boundary_recall": 0.7001807286217064
+      }
+    },
+    "val_history": {
+      "loss": [
+        1.5404638842190845,
+        1.5317551660655748,
+        1.5534203946000278,
+        1.59345051835079,
+        1.6570582386880819,
+        1.6968347747727195
+      ],
+      "boundary_f1": [
+        0.8510138361803014,
+        0.850782890243594,
+        0.862855957259194,
+        0.858939601921757,
+        0.8597615126615566,
+        0.8604846024273313
+      ],
+      "boundary_prec": [
+        0.7689593548091463,
+        0.7672572427952247,
+        0.7942861690275346,
+        0.7856582334107602,
+        0.7896795856629235,
+        0.7915799176745443
+      ],
+      "boundary_rec": [
+        0.9526720157444554,
+        0.9547157671637272,
+        0.944383468321853,
+        0.9472977064567406,
+        0.9434940579819847,
+        0.9425289531451063
+      ],
+      "intonation_f1": [
+        0.366412284379527,
+        0.3877785761093741,
+        0.385904690818983,
+        0.3884133078199068,
+        0.3979994640010567,
+        0.40401193569563176
+      ],
+      "break_idx_f1": [
+        0.705297964455654,
+        0.705225786726542,
+        0.7021156788664068,
+        0.7000404083372249,
+        0.694233168708652,
+        0.6954783081602338
+      ]
+    },
+    "train_history": {
+      "loss": [
+        1.5953489808494408,
+        1.504378574551993,
+        1.4309827185360349,
+        1.351726585863956,
+        1.278830744983274,
+        1.2225622948087662
+      ],
+      "boundary_f1": [
+        0.8354490703936935,
+        0.8547064051218204,
+        0.8619762053109102,
+        0.8667538678753292,
+        0.8701870549124079,
+        0.8722413956202455
+      ],
+      "intonation_f1": [
+        0.3415748244308708,
+        0.37986116536252124,
+        0.40801189240312913,
+        0.4376713508350876,
+        0.47068221258571236,
+        0.49626039639291
+      ],
+      "break_idx_f1": [
+        0.6922233440576684,
+        0.7204672148905491,
+        0.7469177550218078,
+        0.7747646415421798,
+        0.7978429749989197,
+        0.8133305692614672
+      ]
+    }
+  }
+}

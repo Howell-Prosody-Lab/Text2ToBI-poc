@@ -1,0 +1,233 @@
+{
+  "run_id": "LP_wl2",
+  "run_notes": "",
+  "timestamp": "2026-06-23T17:02:46.811078",
+  "data": {
+    "datasets": [
+      "libri",
+      "ps"
+    ],
+    "n_samples_train_pool": 275956,
+    "n_train": 245300,
+    "n_val": 30656,
+    "n_test": 383,
+    "n_words_by_corpus": {
+      "libri": 2564256,
+      "ps": 4919077
+    },
+    "n_words_total": 7483333,
+    "n_words_val_by_corpus": {
+      "libri": 284955,
+      "ps": 546571
+    },
+    "n_words_val_total": 831526,
+    "n_words_train_total": 6651807,
+    "split_mode": "fixed_sbc_holdout",
+    "split_seed": 42,
+    "train_frac": 0.8,
+    "val_frac": 0.1
+  },
+  "preprocessing": {
+    "strip_punctuation": true,
+    "train_on_text": true,
+    "train_on_pos": false,
+    "pos_embedding_dim": null,
+    "extra_features": [],
+    "max_length": 128
+  },
+  "model": {
+    "base": "distilbert-base-uncased",
+    "use_pos_embedding": false,
+    "pos_emb_dim": null,
+    "num_pos_tags": null,
+    "hidden_size": 768,
+    "n_trainable_params": 66368263
+  },
+  "versions": {
+    "transformers": "5.12.0",
+    "torch": "2.11.0+cu128",
+    "spacy": null,
+    "cuda": "12.8"
+  },
+  "training": {
+    "batch_size": 16,
+    "learning_rate": 2e-05,
+    "num_epochs": 6,
+    "warmup_steps": 0,
+    "weight_decay": 0.01,
+    "imbalance_strategy": "weighted_loss",
+    "boundary_loss_weight": 2.0,
+    "boundary_task_weight": 1.0,
+    "intonation_task_weight": 1.0,
+    "break_idx_task_weight": 1.0,
+    "best_epoch": 3
+  },
+  "results": {
+    "best_val_boundary_f1": 0.7856542465509304,
+    "test": {
+      "boundary": {
+        "f1": 0.7210438645197113,
+        "precision": 0.8660797652394291,
+        "recall": 0.617616284600019
+      },
+      "intonation": {
+        "f1": 0.22147715747001026,
+        "precision": 0.17775466567271256,
+        "recall": 0.3403369379880466
+      },
+      "break_idx": {
+        "f1": NaN,
+        "precision": NaN,
+        "recall": NaN
+      }
+    },
+    "bu_eval": {
+      "f1": 0.5926669045315401,
+      "precision": 0.5976740820439287,
+      "recall": 0.6112786315656573
+    },
+    "intonation_checkpoint": {
+      "enabled": true,
+      "best_intonation_epoch": 6,
+      "best_val_intonation_f1": 0.3936805654992556,
+      "test": {
+        "boundary": {
+          "f1": 0.7178686879946494,
+          "precision": 0.8668730650154799,
+          "recall": 0.6125749072576809
+        },
+        "intonation": {
+          "f1": 0.23639330893865718,
+          "precision": 0.3815817907422299,
+          "recall": 0.34886145431245247
+        },
+        "break_idx": {
+          "f1": NaN,
+          "precision": NaN,
+          "recall": NaN
+        }
+      },
+      "bu_eval": {
+        "f1": 0.5613057648766385,
+        "precision": 0.5622000951565038,
+        "recall": 0.5686283345349675
+      }
+    },
+    "per_epoch_test": {
+      "2": {
+        "val_boundary_f1": 0.7846533923738657,
+        "test_boundary_f1": 0.7304813418565262,
+        "test_boundary_precision": 0.8581514762516046,
+        "test_boundary_recall": 0.6358793874250928
+      },
+      "3": {
+        "val_boundary_f1": 0.7856542465509304,
+        "test_boundary_f1": 0.7210438645197113,
+        "test_boundary_precision": 0.8660797652394291,
+        "test_boundary_recall": 0.617616284600019
+      },
+      "4": {
+        "val_boundary_f1": 0.7849243012767674,
+        "test_boundary_f1": 0.7200400022223457,
+        "test_boundary_precision": 0.8656158161902218,
+        "test_boundary_recall": 0.616379720346238
+      },
+      "5": {
+        "val_boundary_f1": 0.7845661638269095,
+        "test_boundary_f1": 0.7206347444931477,
+        "test_boundary_precision": 0.8647137150466045,
+        "test_boundary_recall": 0.617711404927233
+      },
+      "6": {
+        "val_boundary_f1": 0.7843695692720345,
+        "test_boundary_f1": 0.7178686879946494,
+        "test_boundary_precision": 0.8668730650154799,
+        "test_boundary_recall": 0.6125749072576809
+      }
+    },
+    "val_history": {
+      "loss": [
+        1.679886436412628,
+        1.6683567916052824,
+        1.6791565356025615,
+        1.7083874942116548,
+        1.7456112361526688,
+        1.7716591889213669
+      ],
+      "boundary_f1": [
+        0.7835179742256387,
+        0.7846533923738657,
+        0.7856542465509304,
+        0.7849243012767674,
+        0.7845661638269095,
+        0.7843695692720345
+      ],
+      "boundary_prec": [
+        0.7585378638204241,
+        0.7532873323785966,
+        0.7594719373399331,
+        0.7575650043784591,
+        0.7559227110447012,
+        0.755949052146224
+      ],
+      "boundary_rec": [
+        0.8101993982982546,
+        0.8187450396520219,
+        0.8137062489617877,
+        0.8143337906594725,
+        0.8154658266631393,
+        0.8150105513138385
+      ],
+      "intonation_f1": [
+        0.31666009932888334,
+        0.3598131132930929,
+        0.3663332490925286,
+        0.36952433342854824,
+        0.386362192648211,
+        0.3936805654992556
+      ],
+      "break_idx_f1": [
+        0.6541508808702099,
+        0.6638744153760662,
+        0.6628676581264628,
+        0.6606053897948483,
+        0.6586772411467866,
+        0.6559155974202031
+      ]
+    },
+    "train_history": {
+      "loss": [
+        1.7812805174614972,
+        1.713391287898134,
+        1.6620745354631132,
+        1.6084549414047895,
+        1.5572034445329588,
+        1.517300136416505
+      ],
+      "boundary_f1": [
+        0.7707951801887507,
+        0.7861018412402577,
+        0.7923848675368175,
+        0.7960563148179891,
+        0.7986198453300294,
+        0.7998845929789161
+      ],
+      "intonation_f1": [
+        0.2971791140338621,
+        0.3415302752291897,
+        0.3777837913750081,
+        0.4142219694163401,
+        0.4479435013848303,
+        0.47194470724519827
+      ],
+      "break_idx_f1": [
+        0.6422130171308615,
+        0.670229892558305,
+        0.6921561688835471,
+        0.7140601441793419,
+        0.732798504012348,
+        0.7473017468093286
+      ]
+    }
+  }
+}
