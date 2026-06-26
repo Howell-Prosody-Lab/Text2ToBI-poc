@@ -193,10 +193,7 @@ text2tobi-poc/
 │   │   ├── annotation_pipeline_libritts_silver.ipynb
 │   │   ├── annotation_pipeline_peoples_speech_silver.ipynb
 │   │   ├── annotation_pipeline_sbcsae.ipynb
-│   │   ├── annotation_pipeline_bu.ipynb
-│   │   ├── parameter_tuning_w2t.ipynb
-│   │   ├── crossref_bu.py
-│   │   └── verify_bu_pipeline.py
+│   │   └── annotation_pipeline_bu.ipynb
 │   ├── model/
 │   │   ├── distilBERT_multitrain.ipynb   # main training notebook
 │   │   └── run_summary.ipynb             # iterates models/ and creates report
@@ -222,7 +219,7 @@ text2tobi-poc/
 └── README.md
 ```
 
-**Model weights** are not included in this repository due to file size. The best-performing model (Model #36) is publicly available on HuggingFace under the Apache 2.0 license: [`lemmalei/text2tobi`](https://huggingface.co/lemmalei/text2tobi).
+**Model weights** are not included in this repository due to file size. The best-performing model (Model #36) is publicly available on HuggingFace under the Apache 2.0 license: [`lemmatix/text2tobi`](https://huggingface.co/lemmatix/text2tobi).
 
 ### Environment
 
@@ -297,7 +294,7 @@ Both patches survive for the duration of the Colab session but are lost on runti
 
 ## Citation and Licensing
 
-This repository is released under Apache 2.0. Model weights are separately licensed under Apache 2.0 at [`lemmalei/text2tobi`](https://huggingface.co/lemmalei/text2tobi).
+This repository is released under Apache 2.0. Model weights are separately licensed under Apache 2.0 at [`lemmatix/text2tobi`](https://huggingface.co/lemmatix/text2tobi).
 
 Code generation assistance provided by Claude Sonnet 4.6 (Anthropic, 2026). Prompts, design decisions, and verification by the author.
 
